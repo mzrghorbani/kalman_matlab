@@ -1,0 +1,6 @@
+
+Warnings: 
+
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixV.m, line : 41, column : 23. The expression 'sigmaPhi2 = pitch2SoverR_2' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixV.m, line : 42, column : 22. The expression 'sigmaZ   = length2S' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/InvPt2.m, line : 12, column : 18. The expression 'theConst = kalmanMultScatTerm * phiMult;' was not executed during simulation. Consider using a more thorough testbench.

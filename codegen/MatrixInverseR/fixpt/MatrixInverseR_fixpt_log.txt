@@ -1,0 +1,9 @@
+
+Warnings: 
+
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 4, column : 11. The expression 'r = Rmat(1,1) / Rmat(2,1)' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 5, column : 11. The expression 't = 1.0 / (r * Rmat(4,1) - Rmat(3,1))' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 6, column : 22. The expression 'RmatInv(1,1) = Rmat(4,1) / Rmat(2,1) * t' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 7, column : 22. The expression 'RmatInv(2,1) = -t' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 8, column : 22. The expression 'RmatInv(3,1) = -Rmat(3,1) / Rmat(2,1) * t' was not executed during simulation. Consider using a more thorough testbench.
+File: /home/eepgmmg1/Documents/matlab_projects/hls_matlab/MatrixInverseR.m, line : 9, column : 22. The expression 'RmatInv(4,1) = r * t' was not executed during simulation. Consider using a more thorough testbench.

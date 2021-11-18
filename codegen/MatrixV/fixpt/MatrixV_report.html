@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fixed-Point Report for MatrixV</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-08-15 15:08:01</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>MatrixV<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [V] = MatrixV(r, z, inv2R, tanL)
+    V = zeros(4,1);
+    V(2,1) = 0;
+    V(3,1) = 0;
+    bField = 3.8112;
+    rMult = 9.938;
+    phiMult = 20860.75;
+    rphiMult = rMult * phiMult;
+    invRoot12  = 0.288675;
+    pitchPS = rphiMult * invRoot12 * 0.0099;
+    pitch2S = rphiMult * invRoot12 * 0.0089;
+    lengthPS = 1.41*rMult * invRoot12 * 0.15;
+    length2S = rMult * invRoot12 * 5.02; 
+    lengthPS105 = 1.05 * lengthPS;
+    length2S105 = 1.05 * length2S;
+    lengthPS09  = 0.9 * lengthPS;
+    length2S09  = 0.9 * length2S;
+    zBarrel = rMult * 125;
+    zWheel12 = rMult * 170;
+    rPSbarrel = rMult * 60.0;
+    rPSwheel12 = rMult * 66.4;
+    rPSwheel345 = rMult * 64.6;
+    
+    pitchPSoverR_2 = PitchOverR_2(pitchPS, r);
+    pitch2SoverR_2 = PitchOverR_2(pitch2S, r);
+    
+    absZ = z;
+
+    if (z(1) &lt; 0)
+        absZ = -z;
+    end
+    
+    calcPhiExtra2_PS = InvPt2(1, lengthPS);
+    calcPhiExtra2_2S = InvPt2(1, length2S);
+    
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov black" style="background-color: rgb(255,160,118);">Once</TD>
+<TD class="padd"><pre>    if (absZ(1) &lt; zBarrel)
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(157,38,35);">0%</TD>
+<TD class="padd"><pre>        if (r(1) &lt; rPSbarrel)
+            sigmaPhi2 = pitchPSoverR_2;
+            sigmaZ   = lengthPS;
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>        else
+            sigmaPhi2 = pitch2SoverR_2;
+            sigmaZ   = length2S;
+        end
+            sigmaPhiExtra2 = 0;
+    else
+
+        if(absZ &lt; zWheel12)
+            psEndcap = r &lt; rPSwheel12;
+        else
+            psEndcap = r &lt; rPSwheel345;
+        end
+
+        if (psEndcap == 1)
+            sigmaPhi2 = pitchPSoverR_2;
+            sigmaZ = lengthPS*tanL;
+            sigmaPhiExtra2 = 392.0605;
+        else
+            sigmaPhi2 = pitch2SoverR_2;
+            sigmaZ = length2S*tanL;
+            sigmaPhiExtra2 = 392.0605;
+        end
+    end
+   
+    V(1,1) = sigmaPhi2 + sigmaPhiExtra2 + 3.2129;
+    V(4,1) = sigmaZ * sigmaZ;
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">V</TD><TD class="left">double 4 x 1 </TD><TD class="right">0</TD><TD class="right">2991.775923061404</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">absZ</TD><TD class="left">double</TD><TD class="right">-3071</TD><TD class="right">3071</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(1, 13, 0)</TD></TR>
+<TR class="a">
+<TD class="left">bField</TD><TD class="left">double</TD><TD class="right">3.8112</TD><TD class="right">3.8112</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 14)</TD></TR>
+<TR class="b">
+<TD class="left">calcPhiExtra2_2S</TD><TD class="left">double 36 x 1 </TD><TD class="right">1.8229155742909942</TD><TD class="right">1079.36856615519</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 5)</TD></TR>
+<TR class="a">
+<TD class="left">calcPhiExtra2_PS</TD><TD class="left">double 36 x 1 </TD><TD class="right">0.0032357865429944893</TD><TD class="right">1.9159451652908481</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 15)</TD></TR>
+<TR class="b">
+<TD class="left">inv2R</TD><TD class="left">double</TD><TD class="right">4.023682573512188</TD><TD class="right">4.188401132054535</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">invRoot12</TD><TD class="left">double</TD><TD class="right">0.288675</TD><TD class="right">0.288675</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 17)</TD></TR>
+<TR class="b">
+<TD class="left">length2S</TD><TD class="left">double</TD><TD class="right">14.401637793</TD><TD class="right">14.401637793</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">length2S09</TD><TD class="left">double</TD><TD class="right">12.9614740137</TD><TD class="right">12.9614740137</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left">length2S105</TD><TD class="left">double</TD><TD class="right">15.121719682650001</TD><TD class="right">15.121719682650001</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">lengthPS</TD><TD class="left">double</TD><TD class="right">0.606762229725</TD><TD class="right">0.606762229725</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 16)</TD></TR>
+<TR class="b">
+<TD class="left">lengthPS09</TD><TD class="left">double</TD><TD class="right">0.5460860067525001</TD><TD class="right">0.5460860067525001</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 16)</TD></TR>
+<TR class="a">
+<TD class="left">lengthPS105</TD><TD class="left">double</TD><TD class="right">0.63710034121125</TD><TD class="right">0.63710034121125</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 16)</TD></TR>
+<TR class="b">
+<TD class="left">phiMult</TD><TD class="left">double</TD><TD class="right">20860.75</TD><TD class="right">20860.75</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 1)</TD></TR>
+<TR class="a">
+<TD class="left">pitch2S</TD><TD class="left">double</TD><TD class="right">532.6330266442013</TD><TD class="right">532.6330266442013</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">pitch2SoverR_2</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+<TR class="a">
+<TD class="left">pitchPS</TD><TD class="left">double</TD><TD class="right">592.4794341323139</TD><TD class="right">592.4794341323139</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">pitchPSoverR_2</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+<TR class="a">
+<TD class="left">psEndcap</TD><TD class="left">logical</TD><TD class="right">0</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+<TR class="b">
+<TD class="left">r</TD><TD class="left">double</TD><TD class="right">228</TD><TD class="right">795</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 10, 0)</TD></TR>
+<TR class="a">
+<TD class="left">rMult</TD><TD class="left">double</TD><TD class="right">9.938</TD><TD class="right">9.938</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left">rPSbarrel</TD><TD class="left">double</TD><TD class="right">596.2800000000001</TD><TD class="right">596.2800000000001</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="a">
+<TD class="left">rPSwheel12</TD><TD class="left">double</TD><TD class="right">659.8832000000001</TD><TD class="right">659.8832000000001</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">rPSwheel345</TD><TD class="left">double</TD><TD class="right">641.9947999999999</TD><TD class="right">641.9947999999999</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="c">
+<TD class="left">rphiMult</TD><TD class="left">double</TD><TD class="right">207314.13350000003</TD><TD class="right">207314.13350000003</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, -2)</TD></TR>
+<TR class="b">
+<TD class="left">sigmaPhi2</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+<TR class="a">
+<TD class="left">sigmaPhiExtra2</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">392.0605</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 7)</TD></TR>
+<TR class="b">
+<TD class="left">sigmaZ</TD><TD class="left">double</TD><TD class="right">-54.69712902028226</TD><TD class="right">0.606762229725</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">tanL</TD><TD class="left">double</TD><TD class="right">-3.8</TD><TD class="right">-3.745338702391369</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">z</TD><TD class="left">double</TD><TD class="right">-3071</TD><TD class="right">-919</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(1, 13, 0)</TD></TR>
+<TR class="a">
+<TD class="left">zBarrel</TD><TD class="left">double</TD><TD class="right">1242.25</TD><TD class="right">1242.25</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 5)</TD></TR>
+<TR class="b">
+<TD class="left">zWheel12</TD><TD class="left">double</TD><TD class="right">1689.46</TD><TD class="right">1689.46</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 5)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>PitchOverR_2>1<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [ y ] = PitchOverR_2(pitch, r)
+    get = zeros(512,1);
+    for n = 3:511
+      pitchOverR = pitch / (bitshift(n,4) + 0.5 * bitshift(1,4));
+    end 
+    get(n) = pitchOverR * pitchOverR;
+    y = get(round(r/4));
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">get</TD><TD class="left">double 512 x 1 </TD><TD class="right">0</TD><TD class="right">0.005241013983334238</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 23)</TD></TR>
+<TR class="b">
+<TD class="left">n</TD><TD class="left">double</TD><TD class="right">3</TD><TD class="right">511</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 9, 0)</TD></TR>
+<TR class="a">
+<TD class="left">pitch</TD><TD class="left">double</TD><TD class="right">592.4794341323139</TD><TD class="right">592.4794341323139</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">pitchOverR</TD><TD class="left">double</TD><TD class="right">0.07239484776787805</TD><TD class="right">10.579989895219892</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">r</TD><TD class="left">double</TD><TD class="right">228</TD><TD class="right">795</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 10, 0)</TD></TR>
+<TR class="b">
+<TD class="left">y</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>PitchOverR_2>2<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [ y ] = PitchOverR_2(pitch, r)
+    get = zeros(512,1);
+    for n = 3:511
+      pitchOverR = pitch / (bitshift(n,4) + 0.5 * bitshift(1,4));
+    end 
+    get(n) = pitchOverR * pitchOverR;
+    y = get(round(r/4));
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">get</TD><TD class="left">double 512 x 1 </TD><TD class="right">0</TD><TD class="right">0.004235697557595192</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 23)</TD></TR>
+<TR class="b">
+<TD class="left">n</TD><TD class="left">double</TD><TD class="right">3</TD><TD class="right">511</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 9, 0)</TD></TR>
+<TR class="a">
+<TD class="left">pitch</TD><TD class="left">double</TD><TD class="right">532.6330266442013</TD><TD class="right">532.6330266442013</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">pitchOverR</TD><TD class="left">double</TD><TD class="right">0.06508223688223379</TD><TD class="right">9.51130404721788</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">r</TD><TD class="left">double</TD><TD class="right">228</TD><TD class="right">795</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 10, 0)</TD></TR>
+<TR class="b">
+<TD class="left">y</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>InvPt2<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [ y ] = InvPt2(iOpt, scaleFactor)
+    rMult = 2^12 / 103.0382;
+    phiMult = 2^14 / 0.698131701;
+    inv2R_Mult = phiMult / rMult;
+    bField = 3.8112;
+    invPtToInvR = bField * (3.0e8 / 1.0e11);
+    minPtBin = -18;
+    maxPtBin = 17;
+    minPt_HT = 3;
+    numPtBins = 36;
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(157,38,35);">0%</TD>
+<TD class="padd"><pre>    if(iOpt == 0)
+        theConst = kalmanMultScatTerm * phiMult;
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>    else
+       theConst = (0.5 * invPtToInvR * scaleFactor * inv2R_Mult);
+    end
+    
+    get = zeros(36,1);
+    for m = 1 : 1 : 36
+       constOverPt = theConst * (1 / minPt_HT) * (m + 0.5) / (numPtBins / 2);
+       get(m) = constOverPt * constOverPt;
+       y = get;
+    end
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">bField</TD><TD class="left">double</TD><TD class="right">3.8112</TD><TD class="right">3.8112</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 14)</TD></TR>
+<TR class="b">
+<TD class="left">constOverPt</TD><TD class="left">double</TD><TD class="right">0.05688397439520633</TD><TD class="right">32.85374508568528</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="a">
+<TD class="left">get</TD><TD class="left">double 36 x 1 </TD><TD class="right">0</TD><TD class="right">1079.36856615519</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 5)</TD></TR>
+<TR class="b">
+<TD class="left">iOpt</TD><TD class="left">double</TD><TD class="right">1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 1, 0)</TD></TR>
+<TR class="a">
+<TD class="left">inv2R_Mult</TD><TD class="left">double</TD><TD class="right">590.3653986914427</TD><TD class="right">590.3653986914427</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">invPtToInvR</TD><TD class="left">double</TD><TD class="right">0.0114336</TD><TD class="right">0.0114336</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 22)</TD></TR>
+<TR class="a">
+<TD class="left">m</TD><TD class="left">double</TD><TD class="right">1</TD><TD class="right">36</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 6, 0)</TD></TR>
+<TR class="b">
+<TD class="left">maxPtBin</TD><TD class="left">double</TD><TD class="right">17</TD><TD class="right">17</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 5, 0)</TD></TR>
+<TR class="a">
+<TD class="left">minPtBin</TD><TD class="left">double</TD><TD class="right">-18</TD><TD class="right">-18</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(1, 6, 0)</TD></TR>
+<TR class="b">
+<TD class="left">minPt_HT</TD><TD class="left">double</TD><TD class="right">3</TD><TD class="right">3</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 2, 0)</TD></TR>
+<TR class="a">
+<TD class="left">numPtBins</TD><TD class="left">double</TD><TD class="right">36</TD><TD class="right">36</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 6, 0)</TD></TR>
+<TR class="b">
+<TD class="left">phiMult</TD><TD class="left">double</TD><TD class="right">23468.351281759085</TD><TD class="right">23468.351281759085</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 1)</TD></TR>
+<TR class="a">
+<TD class="left">rMult</TD><TD class="left">double</TD><TD class="right">39.75224722481565</TD><TD class="right">39.75224722481565</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="b">
+<TD class="left">scaleFactor</TD><TD class="left">double</TD><TD class="right">0.606762229725</TD><TD class="right">14.401637793</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">theConst</TD><TD class="left">double</TD><TD class="right">2.047823078227428</TD><TD class="right">48.60554067471248</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="b">
+<TD class="left">y</TD><TD class="left">double 36 x 1 </TD><TD class="right">0</TD><TD class="right">1079.36856615519</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 5)</TD></TR>
+</TABLE>
+
+</body>
+</html>

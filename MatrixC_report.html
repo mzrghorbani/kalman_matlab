@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)file:///home/eepgmmg1/Documents/matlab_projects/hls_matlab/codegen/MatrixC/fixpt/MatrixC_report.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Fixed-Point Report for MatrixC</title>
+
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-06-28 14:17:07</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>MatrixC<span></span></span></h2>
+<table class="code">
+<tbody><tr>
+<th class="cov padd">Simulation Coverage</th>
+<th>Code</th>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>function [ C ] = MatrixC(c00, c11, c22, c33, c01, c23)
+    C = zeros(16,1);
+    C(1,1)  = c00;
+    C(6,1)  = c11;
+    C(11,1) = c22;
+    C(16,1) = c33;
+    C(5,1)  = c01;
+    C(15,1) = c23;
+    C(9,1)  = 0.0;
+    C(13,1) = 0.0;
+    C(10,1) = 0.0;
+    C(14,1) = 0.0;
+    C(2,1)  = C(5,1);
+    C(12,1) = C(15,1);
+    C(3,1)  = C(9,1);
+    C(4,1) = C(13,1);
+    C(7,1)  = C(10,1);
+    C(8,1)  = C(14,1);
+end</pre></td>
+</tr>
+</tbody></table>
+<table><tbody><tr class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <br> (Best For WL = 16)</th></tr><tr class="c">
+<td class="left">C</td><td class="left">double 16 x 1 </td><td class="right">-6.152852671471156</td><td class="right">45275.208540639745</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, -1)</td></tr>
+<tr class="b">
+<td class="left">c00</td><td class="left">double</td><td class="right">0.0008342044994494868</td><td class="right">0.1419783167487022</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 18)</td></tr>
+<tr class="a">
+<td class="left">c01</td><td class="left">double</td><td class="right">0</td><td class="right">27.830198874968303</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 11)</td></tr>
+<tr class="b">
+<td class="left">c11</td><td class="left">double</td><td class="right">71.57768079753532</td><td class="right">45275.208540639745</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 0)</td></tr>
+<tr class="a">
+<td class="left">c22</td><td class="left">double</td><td class="right">0.00023340918851108214</td><td class="right">0.0625</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 19)</td></tr>
+<tr class="b">
+<td class="left">c23</td><td class="left">double</td><td class="right">-6.152852671471156</td><td class="right">0</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 12)</td></tr>
+<tr class="a">
+<td class="left">c33</td><td class="left">double</td><td class="right">13.694457391956348</td><td class="right">2469.126811598224</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 4)</td></tr>
+</tbody></table>
+
+
+
+</body></html>

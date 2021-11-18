@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- saved from url=(0104)file:///home/eepgmmg1/Documents/matlab_projects/hls_matlab/codegen/VectorRes/fixpt/VectorRes_report.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Fixed-Point Report for VectorRes</title>
+
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-06-28 15:01:26</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>VectorRes<span></span></span></h2>
+<table class="code">
+<tbody><tr>
+<th class="cov padd">Simulation Coverage</th>
+<th>Code</th>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>function [ res ] = VectorRes(m, H, x)
+    res = zeros(2,1);
+    for i0=1:2
+        d0 = 0;
+</pre></td>
+</tr>
+<tr>
+<td class="cov black" style="background-color: rgb(255,160,118);">Once</td>
+<td class="padd"><pre>        for i1=1:4
+            d0 = d0 + H(i0 + bitshift(i1-1, 1)) * x(i1);
+        end</pre></td>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>        res(i0) = m(i0) - d0;
+    end
+end</pre></td>
+</tr>
+</tbody></table>
+<table><tbody><tr class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <br> (Best For WL = 16)</th></tr><tr class="a">
+<td class="left">H</td><td class="left">double 8 x 1 </td><td class="right">-795</td><td class="right">795</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(1, 11, 0)</td></tr>
+<tr class="b">
+<td class="left">d0</td><td class="left">double</td><td class="right">-3180.8928675177867</td><td class="right">1131.120211978879</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 3)</td></tr>
+<tr class="a">
+<td class="left">i0</td><td class="left">double</td><td class="right">1</td><td class="right">2</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 2, 0)</td></tr>
+<tr class="b">
+<td class="left">i1</td><td class="left">double</td><td class="right">1</td><td class="right">4</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 3, 0)</td></tr>
+<tr class="a">
+<td class="left">m</td><td class="left">double 2 x 1 </td><td class="right">-3071</td><td class="right">1171</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(1, 13, 0)</td></tr>
+<tr class="b">
+<td class="left">res</td><td class="left">double 2 x 1 </td><td class="right">-7.396508148274961</td><td class="right">39.87978802112093</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 9)</td></tr>
+<tr class="a">
+<td class="left">x</td><td class="left">double 4 x 1 </td><td class="right">-74.53546354652934</td><td class="right">2120.3613116870483</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 3)</td></tr>
+</tbody></table>
+
+
+
+</body></html>

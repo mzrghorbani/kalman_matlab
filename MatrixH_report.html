@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)file:///home/eepgmmg1/Documents/matlab_projects/hls_matlab/codegen/MatrixH/fixpt/MatrixH_report.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Fixed-Point Report for MatrixH</title>
+
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-08-10 16:50:22</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>MatrixH<span></span></span></h2>
+<table class="code">
+<tbody><tr>
+<th class="cov padd">Simulation Coverage</th>
+<th>Code</th>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>function [H] = MatrixH( r )
+    H = zeros(8,1);
+    H(1,1) = -r;
+    H(3,1) = 1.0;
+    H(5,1) = 0.0;
+    H(7,1) = 0.0;
+    H(2,1) = 0.0;
+    H(4,1) = 0.0;
+    H(6,1) = r;
+    H(8,1) = 1.0;
+end</pre></td>
+</tr>
+</tbody></table>
+<table><tbody><tr class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <br> (Best For WL = 16)</th></tr><tr class="a">
+<td class="left">H</td><td class="left">double 8 x 1 </td><td class="right">-795</td><td class="right">795</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(1, 11, 0)</td></tr>
+<tr class="b">
+<td class="left">r</td><td class="left">double</td><td class="right">228</td><td class="right">795</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 10, 0)</td></tr>
+</tbody></table>
+
+
+
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fixed-Point Report for MatrixC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-06-28 14:17:07</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>MatrixC<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [ C ] = MatrixC(c00, c11, c22, c33, c01, c23)
+    C = zeros(16,1);
+    C(1,1)  = c00;
+    C(6,1)  = c11;
+    C(11,1) = c22;
+    C(16,1) = c33;
+    C(5,1)  = c01;
+    C(15,1) = c23;
+    C(9,1)  = 0.0;
+    C(13,1) = 0.0;
+    C(10,1) = 0.0;
+    C(14,1) = 0.0;
+    C(2,1)  = C(5,1);
+    C(12,1) = C(15,1);
+    C(3,1)  = C(9,1);
+    C(4,1) = C(13,1);
+    C(7,1)  = C(10,1);
+    C(8,1)  = C(14,1);
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="c">
+<TD class="left">C</TD><TD class="left">double 16 x 1 </TD><TD class="right">-6.152852671471156</TD><TD class="right">45275.208540639745</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, -1)</TD></TR>
+<TR class="b">
+<TD class="left">c00</TD><TD class="left">double</TD><TD class="right">0.0008342044994494868</TD><TD class="right">0.1419783167487022</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 18)</TD></TR>
+<TR class="a">
+<TD class="left">c01</TD><TD class="left">double</TD><TD class="right">0</TD><TD class="right">27.830198874968303</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 11)</TD></TR>
+<TR class="b">
+<TD class="left">c11</TD><TD class="left">double</TD><TD class="right">71.57768079753532</TD><TD class="right">45275.208540639745</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 0)</TD></TR>
+<TR class="a">
+<TD class="left">c22</TD><TD class="left">double</TD><TD class="right">0.00023340918851108214</TD><TD class="right">0.0625</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 19)</TD></TR>
+<TR class="b">
+<TD class="left">c23</TD><TD class="left">double</TD><TD class="right">-6.152852671471156</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">c33</TD><TD class="left">double</TD><TD class="right">13.694457391956348</TD><TD class="right">2469.126811598224</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 4)</TD></TR>
+</TABLE>
+
+</body>
+</html>

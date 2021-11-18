@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)file:///home/eepgmmg1/Documents/matlab_projects/hls_matlab/codegen/MatrixV/fixpt/MatrixV_report.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Fixed-Point Report for MatrixV</title>
+
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2018-06-28 14:11:56</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>MatrixV<span></span></span></h2>
+<table class="code">
+<tbody><tr>
+<th class="cov padd">Simulation Coverage</th>
+<th>Code</th>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>function [V] = MatrixV(r, z, inv2R, tanL)
+    V = zeros(4,1);
+    V(2,1) = 0;
+    V(3,1) = 0;
+    rMult = 9.938;
+    phiMult = 20860.75;
+    rphiMult = rMult * phiMult;
+    invRoot12  = 0.288675;
+    pitchPS = rphiMult * invRoot12 * 0.0099;
+    pitch2S = rphiMult * invRoot12 * 0.0089;
+    lengthPS = 1.41*rMult * invRoot12 * 0.15;
+    length2S = rMult * invRoot12 * 5.02; 
+    lengthPS105 = 1.05 * lengthPS;
+    length2S105 = 1.05 * length2S;
+    lengthPS09  = 0.9 * lengthPS;
+    length2S09  = 0.9 * length2S;
+    zBarrel = rMult * 125;
+    zWheel12 = rMult * 170;
+    rPSbarrel = rMult * 60.0;
+    rPSwheel12 = rMult * 66.4;
+    rPSwheel345 = rMult * 64.6;
+    
+    pitchPSoverR = PitchOverR(pitchPS, r);
+    pitch2SoverR = PitchOverR(pitch2S, r);
+    
+    absZ = z;
+
+    if (z(1) &lt; 0)
+        absZ = -z;
+    end
+    
+</pre></td>
+</tr>
+<tr>
+<td class="cov black" style="background-color: rgb(255,160,118);">Once</td>
+<td class="padd"><pre>    if (absZ(1) &lt; zBarrel)
+</pre></td>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(157,38,35);">0%</td>
+<td class="padd"><pre>        if (r(1) &lt; rPSbarrel)
+            sigmaPhi = pitchPSoverR;
+            sigmaZ   = lengthPS;
+</pre></td>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>        else
+            sigmaPhi = pitch2SoverR;
+            sigmaZ   = length2S;
+        end
+            sigmaPhiExtra = 0;
+    else
+
+        if(absZ &lt; zWheel12)
+            psEndcap = r &lt; rPSwheel12;
+        else
+            psEndcap = r &lt; rPSwheel345;
+        end
+
+        if (psEndcap == 1)
+            sigmaPhi = pitchPSoverR;
+            sigmaPhiExtra = lengthPS105*inv2R;
+            sigmaZ = lengthPS09*tanL;
+        else
+            sigmaPhi = pitch2SoverR;
+            sigmaPhiExtra = length2S105*inv2R;
+            sigmaZ = length2S09*tanL;
+        end
+    end
+    V(1,1) = sigmaPhi*sigmaPhi + sigmaPhiExtra*sigmaPhiExtra;
+    V(4,1) = sigmaZ*sigmaZ;
+end</pre></td>
+</tr>
+</tbody></table>
+<table><tbody><tr class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <br> (Best For WL = 16)</th></tr><tr class="a">
+<td class="left">V</td><td class="left">double 4 x 1 </td><td class="right">0</td><td class="right">3661.1628186339403</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 4)</td></tr>
+<tr class="b">
+<td class="left">absZ</td><td class="left">double</td><td class="right">-3071</td><td class="right">3071</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(1, 13, 0)</td></tr>
+<tr class="a">
+<td class="left">inv2R</td><td class="left">double</td><td class="right">4.001123103795958</td><td class="right">4.188401132054535</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 13)</td></tr>
+<tr class="b">
+<td class="left">invRoot12</td><td class="left">double</td><td class="right">0.288675</td><td class="right">0.288675</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 17)</td></tr>
+<tr class="a">
+<td class="left">length2S</td><td class="left">double</td><td class="right">14.401637793</td><td class="right">14.401637793</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 12)</td></tr>
+<tr class="b">
+<td class="left">length2S09</td><td class="left">double</td><td class="right">12.9614740137</td><td class="right">12.9614740137</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 12)</td></tr>
+<tr class="a">
+<td class="left">length2S105</td><td class="left">double</td><td class="right">15.121719682650001</td><td class="right">15.121719682650001</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 12)</td></tr>
+<tr class="b">
+<td class="left">lengthPS</td><td class="left">double</td><td class="right">0.606762229725</td><td class="right">0.606762229725</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 16)</td></tr>
+<tr class="a">
+<td class="left">lengthPS09</td><td class="left">double</td><td class="right">0.5460860067525001</td><td class="right">0.5460860067525001</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 16)</td></tr>
+<tr class="b">
+<td class="left">lengthPS105</td><td class="left">double</td><td class="right">0.63710034121125</td><td class="right">0.63710034121125</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 16)</td></tr>
+<tr class="a">
+<td class="left">phiMult</td><td class="left">double</td><td class="right">20860.75</td><td class="right">20860.75</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 1)</td></tr>
+<tr class="b">
+<td class="left">pitch2S</td><td class="left">double</td><td class="right">532.6330266442013</td><td class="right">532.6330266442013</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="a">
+<td class="left">pitch2SoverR</td><td class="left">double</td><td class="right">0.6674599331380969</td><td class="right">2.315795768018267</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 14)</td></tr>
+<tr class="b">
+<td class="left">pitchPS</td><td class="left">double</td><td class="right">592.4794341323139</td><td class="right">592.4794341323139</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="a">
+<td class="left">pitchPSoverR</td><td class="left">double</td><td class="right">0.7424554312435012</td><td class="right">2.5759975397057127</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 14)</td></tr>
+<tr class="b">
+<td class="left">psEndcap</td><td class="left">logical</td><td class="right">0</td><td class="right">1</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 1, 0)</td></tr>
+<tr class="a">
+<td class="left">r</td><td class="left">double</td><td class="right">228</td><td class="right">795</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 10, 0)</td></tr>
+<tr class="b">
+<td class="left">rMult</td><td class="left">double</td><td class="right">9.938</td><td class="right">9.938</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 12)</td></tr>
+<tr class="a">
+<td class="left">rPSbarrel</td><td class="left">double</td><td class="right">596.2800000000001</td><td class="right">596.2800000000001</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="b">
+<td class="left">rPSwheel12</td><td class="left">double</td><td class="right">659.8832000000001</td><td class="right">659.8832000000001</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="a">
+<td class="left">rPSwheel345</td><td class="left">double</td><td class="right">641.9947999999999</td><td class="right">641.9947999999999</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="c">
+<td class="left">rphiMult</td><td class="left">double</td><td class="right">207314.13350000003</td><td class="right">207314.13350000003</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, -2)</td></tr>
+<tr class="a">
+<td class="left">sigmaPhi</td><td class="left">double</td><td class="right">0.6674599331380969</td><td class="right">2.5759975397057127</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 14)</td></tr>
+<tr class="b">
+<td class="left">sigmaPhiExtra</td><td class="left">double</td><td class="right">0</td><td class="right">60.50386199137701</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 10)</td></tr>
+<tr class="a">
+<td class="left">sigmaZ</td><td class="left">double</td><td class="right">-49.22868824826222</td><td class="right">0.606762229725</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 9)</td></tr>
+<tr class="b">
+<td class="left">tanL</td><td class="left">double</td><td class="right">-3.8</td><td class="right">-3.745338702391369</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(1, 16, 13)</td></tr>
+<tr class="a">
+<td class="left">z</td><td class="left">double</td><td class="right">-3071</td><td class="right">-919</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(1, 13, 0)</td></tr>
+<tr class="b">
+<td class="left">zBarrel</td><td class="left">double</td><td class="right">1242.25</td><td class="right">1242.25</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 5)</td></tr>
+<tr class="a">
+<td class="left">zWheel12</td><td class="left">double</td><td class="right">1689.46</td><td class="right">1689.46</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 5)</td></tr>
+</tbody></table>
+
+<h2>Fixed-Point Report <span>PitchOverR<span></span></span></h2>
+<table class="code">
+<tbody><tr>
+<th class="cov padd">Simulation Coverage</th>
+<th>Code</th>
+</tr>
+<tr>
+<td class="cov white" style="background-color: rgb(5,112,9);">100%</td>
+<td class="padd"><pre>function [ y ] = PitchOverR(pitch, r)
+    get = zeros(512,1);
+    for n = 3:511
+      get(n) = pitch / (bitshift(n,2) + 2);
+    end 
+    y = get(round(r/4));
+end</pre></td>
+</tr>
+</tbody></table>
+<table><tbody><tr class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <br> (Best For WL = 16)</th></tr><tr class="a">
+<td class="left">get</td><td class="left">double 512 x 1 </td><td class="right">0</td><td class="right">42.31995958087957</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 10)</td></tr>
+<tr class="b">
+<td class="left">n</td><td class="left">double</td><td class="right">3</td><td class="right">511</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 9, 0)</td></tr>
+<tr class="a">
+<td class="left">pitch</td><td class="left">double</td><td class="right">532.6330266442013</td><td class="right">592.4794341323139</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 6)</td></tr>
+<tr class="b">
+<td class="left">r</td><td class="left">double</td><td class="right">228</td><td class="right">795</td><td class="right"></td><td class="right"></td><td class="left">Yes</td><td class="left">numerictype(0, 10, 0)</td></tr>
+<tr class="a">
+<td class="left">y</td><td class="left">double</td><td class="right">0.6674599331380969</td><td class="right">2.5759975397057127</td><td class="right"></td><td class="right"></td><td class="left">No</td><td class="left">numerictype(0, 16, 14)</td></tr>
+</tbody></table>
+
+
+
+</body></html>
